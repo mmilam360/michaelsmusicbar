@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michael's Music Bar — Great Food. Cold Drinks. Live Music.</title>
+  <meta name="description" content="Columbus, Ohio's favorite neighborhood spot for craft cocktails, great food, and live music every week.">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #1a1a1a;
+      --bg-section: #222222;
+      --cream: #f0e6d3;
+      --cream-muted: #b8a992;
+      --gold: #c4922a;
+      --gold-light: #d4a94a;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-dark);
+      color: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(26, 26, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(196, 146, 42, 0.15);
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--cream);
+    }
+
+    .nav-brand img {
+      height: 36px;
+      width: auto;
+    }
+
+    .nav-brand span {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(196, 146, 42, 0.08) 0%, transparent 60%),
+        var(--bg-dark);
+    }
+
+    .hero-logo {
+      width: 220px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 24px rgba(196, 146, 42, 0.15));
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.75rem;
+      color: var(--cream);
+    }
+
+    .hero .tagline {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: 2px solid var(--gold);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 2px solid var(--cream-muted);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--cream);
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--cream-muted);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 1.5rem 0 2rem;
+    }
+
+    /* ── About ── */
+    #about {
+      background: var(--bg-section);
+    }
+
+    .about-content {
+      max-width: 700px;
+    }
+
+    .about-content p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: var(--cream);
+    }
+
+    .about-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .about-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--cream-muted);
+    }
+
+    .about-meta .icon {
+      color: var(--gold);
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* ── Live Music ── */
+    #live-music {
+      background: var(--bg-dark);
+      text-align: center;
+      padding: 5rem 1.5rem 6rem;
+    }
+
+    .widget-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      background: var(--bg-section);
+      border: 1px solid rgba(196, 146, 42, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 0 80px rgba(196, 146, 42, 0.05);
+    }
+
+    .widget-wrapper #ontonite-widget {
+      min-height: 100px;
+    }
+
+    .powered-by {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .powered-by a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .powered-by a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Menu ── */
+    #menu {
+      background: var(--bg-section);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .menu-category h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(196, 146, 42, 0.2);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.6rem 0;
+    }
+
+    .menu-item .name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .menu-item .dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(240, 230, 211, 0.2);
+      margin: 0 0.75rem;
+      position: relative;
+      top: -4px;
+    }
+
+    .menu-item .price {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .menu-note {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--cream-muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #111111;
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(196, 146, 42, 0.1);
+    }
+
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-info {
+      font-size: 0.85rem;
+      color: var(--cream-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 146, 42, 0.3);
+      color: var(--cream-muted);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .social-links a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(196, 146, 42, 0.08);
+    }
+
+    .social-links svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .copyright {
+      font-size: 0.75rem;
+      color: rgba(240, 230, 211, 0.35);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(26, 26, 26, 0.98);
+        padding: 1rem 1.5rem 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(196, 146, 42, 0.15);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .hero-logo {
+        width: 160px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .widget-wrapper {
+        padding: 1.5rem 1rem;
+      }
+
+      section {
+        padding: 3.5rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <img src="logo.png" alt="Michael's Music Bar">
+        <span>Michael's Music Bar</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#live-music">Live Music</a></li>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <img src="logo.png" alt="Michael's Music Bar Logo" class="hero-logo">
+    <h1>Michael's Music Bar</h1>
+    <p class="tagline">Great Food. Cold Drinks. Live Music.</p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn btn-primary">View Menu</a>
+      <a href="#live-music" class="btn btn-outline">See What's Playing</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container about-content">
+      <span class="section-label">Welcome</span>
+      <h2 class="section-heading">About Us</h2>
+      <div class="divider"></div>
+      <p>Michael's Music Bar is Columbus, Ohio's favorite neighborhood spot for craft cocktails, great food, and live music every week. Whether you're here for happy hour, a late-night bite, or to catch a local band &mdash; we've got you covered.</p>
+      <div class="about-meta">
+        <span><span class="icon">&#9719;</span> Open Daily 11am – 2am &nbsp;|&nbsp; Kitchen closes at midnight</span>
+        <span><span class="icon">&#9906;</span> 123 High Street, Columbus, OH 43215</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Music -->
+  <section id="live-music">
+    <div class="container">
+      <span class="section-label">What's On</span>
+      <h2 class="section-heading">Live Music This Week</h2>
+      <div class="divider" style="margin-left: auto; margin-right: auto;"></div>
+      <p class="section-sub" style="margin-left: auto; margin-right: auto;">We bring the best local and touring artists to our stage every week.</p>
+
+      <div class="widget-wrapper">
+        <div id="ontonite-widget" data-venue="michael-s-music-bar"></div>
+        <script src="https://manage.ontonite.app/widget.js?v=3"></script>
+        <p class="powered-by">Powered by <a href="https://ontonite.app" target="_blank" rel="noopener">OnTonite</a> &mdash; Never miss a show</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-label">Eat &amp; Drink</span>
+        <h2 class="section-heading">Menu Highlights</h2>
+        <div class="divider" style="margin-left: auto; margin-right: auto;"></div>
+      </div>
+
+      <div class="menu-grid">
+        <div>
+          <div class="menu-category">
+            <h3>Starters</h3>
+            <div class="menu-item">
+              <span class="name">Loaded Nachos</span><span class="dots"></span><span class="price">$12</span>
+            </div>
+            <div class="menu-item">
+              <span class="name">Wings (6pc)</span><span class="dots"></span><span class="price">$11</span>
+            </div>
+            <div class="menu-item">
+              <span class="name">Pretzel Bites</span><span class="dots"></span><span class="price">$9</span>
+            </div>
+          </div>
+
+          <div class="menu-category" style="margin-top: 2rem;">
+            <h3>Mains</h3>
+            <div class="menu-item">
+              <span class="name">Smash Burger</span><span class="dots"></span><span class="price">$14</span>
+            </div>
+            <div class="menu-item">
+              <span class="name">Fish &amp; Chips</span><span class="dots"></span><span class="price">$15</span>
+            </div>
+            <div class="menu-item">
+              <span class="name">BBQ Pulled Pork Sandwich</span><span class="dots"></span><span class="price">$13</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="menu-category">
+            <h3>From the Bar</h3>
+            <div class="menu-item">
+              <span class="name">Draft Beers</span><span class="dots"></span><span class="price">from $5</span>
+            </div>
+            <div class="menu-item">
+              <span class="name">Margaritas</span><span class="dots"></span><span class="price">$10</span>
+            </div>
+            <div class="menu-item">
+              <span class="name">Old Fashioned</span><span class="dots"></span><span class="price">$12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="menu-note">Full menu available in house</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-brand">Michael's Music Bar</div>
+    <div class="footer-info">
+      123 High Street, Columbus, OH 43215<br>
+      (614) 555-0123
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+    <p class="copyright">&copy; 2026 Michael's Music Bar</p>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile hamburger toggle
+    var hamburger = document.getElementById('hamburger');
+    var navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
